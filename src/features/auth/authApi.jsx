@@ -30,6 +30,34 @@ export const authApi = apiSlice.injectEndpoints({
         } catch (error) {}
       },
     }),
+
+    login: builder.mutation({
+      query: (data) => ({
+        url: "/user/login",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          localStorage.setItem(
+            "accessToken",
+            JSON.stringify({
+              accessToken: result?.data?.data?.token,
+              user: result?.data?.data?.user,
+            })
+          );
+
+          dispatch(
+            userLoggedIn({
+              accessToken: result?.data?.data?.token,
+              user: result?.data?.data?.user,
+            })
+          );
+        } catch (error) {}
+      },
+    }),
   }),
 });
 
