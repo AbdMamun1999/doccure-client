@@ -7,6 +7,7 @@ import AddDoctor from "../pages/dashboard/admin/AddDoctor";
 import AllDoctors from "../pages/dashboard/admin/AllDoctors";
 import AllPatient from "../pages/dashboard/admin/AllPatient";
 import DoctorProfile from "../pages/main/DoctorProfile";
+import AppointmentBook from "../pages/main/AppointmentBook";
 
 const routes = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const routes = createBrowserRouter([
       {
         path: "/doctors-profile/:doctorId",
         element: <DoctorProfile />,
+      },
+      {
+        path: "/doctors-booking/:doctorId",
+        element: <AppointmentBook />,
       },
     ],
   },

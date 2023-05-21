@@ -31,10 +31,13 @@ const DoctorSlider = () => {
   if (!isLoading && isError) {
     content = (
       <li className="m-2 text-center">
+        <p>An error found</p>
         {/* <Error message={error?.data} /> */}
       </li>
     );
   }
+
+  console.log(error);
 
   if (!isLoading && !isError && doctors?.length === 0) {
     content = <li className="m-2 text-center">No Doctors found</li>;
