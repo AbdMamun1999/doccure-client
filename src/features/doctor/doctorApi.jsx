@@ -8,7 +8,15 @@ export const doctorApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    addDoctor: builder.mutation({
+      query: (data) => ({
+        url: `/doctors/alldoctor`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllDoctorQuery } = doctorApi;
+export const { useGetAllDoctorQuery, useAddDoctorMutation } = doctorApi;
