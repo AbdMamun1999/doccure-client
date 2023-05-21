@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
-import { RiSettings4Line } from "react-icons/ri";
 import { TbReportAnalytics } from "react-icons/tb";
-import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
-import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
+import { AiOutlineUser } from "react-icons/ai";
+import { FiMessageSquare } from "react-icons/fi";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const menus = [
-    // { name: "Back to home", link: "/", icon: HiArrowNarrowLeft },
     { name: "dashboard", link: "/dashboard", icon: MdOutlineDashboard },
     {
       name: "Add Doctor",

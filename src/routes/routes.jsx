@@ -6,12 +6,19 @@ import Profile from "../pages/dashboard/Profile";
 import AddDoctor from "../pages/dashboard/admin/AddDoctor";
 import AllDoctors from "../pages/dashboard/admin/AllDoctors";
 import AllPatient from "../pages/dashboard/admin/AllPatient";
+import DoctorProfile from "../pages/main/DoctorProfile";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    children: [{ path: "/", element: <Home /> }],
+    children: [
+      { path: "/", element: <Home /> },
+      {
+        path: "/doctors-profile/:doctorId",
+        element: <DoctorProfile />,
+      },
+    ],
   },
   {
     path: "/dashboard",
