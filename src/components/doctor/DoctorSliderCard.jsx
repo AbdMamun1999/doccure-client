@@ -67,9 +67,12 @@ const DoctorSliderCard = ({ doctor }) => {
           >
             View Profile
           </Link>
-          <button className="rounded-full px-4 py-2 text-[14px] text-white bg-[#10defd]  hover:bg-[#1b5d92] hover:text-white ease-in-out duration-300">
+          <Link
+            to={`/doctors-booking/${_id}`}
+            className="rounded-full px-4 py-2 text-[14px] text-white bg-[#10defd]  hover:bg-[#1b5d92] hover:text-white ease-in-out duration-300"
+          >
             Book now
-          </button>
+          </Link>
         </div>
       </div>
     </div>
