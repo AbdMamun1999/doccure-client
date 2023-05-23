@@ -1,7 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import docImgOne from "../../assets/doctors/doctor-01.jpg";
+import { useSelector } from "react-redux";
+import { useGetADoctorQuery } from "../../features/doctor/doctorApi";
+import { useParams } from "react-router-dom";
+import { useCreateAppointmentMutation } from "../../features/appointment/appointmentApi";
 
 const AppointmentBook = () => {
+  const { doctorId } = useParams();
+
+  const { user } = useSelector((state) => state.auth);
+  const [reason, setReason] = useState("");
+  const [date, setDate] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const [
+    createAppointment,
+    {
+      data: appointment,
+      isLoading: isLoadingAppointment,
+      isError: isErrorAppointment,
+      isSuccess: isSuccessAppointment,
+      error: errorAppointment,
+    },
+  ] = useCreateAppointmentMutation();
+
+  //
+  const {
+    data: doctor,
+    isLoading: isLoadingDoctor,
+    isError: isErrorDoctor,
+    isSuccess: isSuccessDoctor,
+    error: errorDoctor,
+  } = useGetADoctorQuery(doctorId);
+
+  const {
+    _id,
+    name: doctorName,
+    email: doctorEmail,
+    image,
+    title,
+    about,
+    role,
+    specialist,
+    gender,
+    consultant_status,
+    location,
+    visiting_hour,
+    visiting_fees,
+    total_patient,
+    like,
+  } = doctor?.data || {};
+
+  const {
+    _id: patientId,
+    firstName,
+    lastName,
+    email: patientEmail,
+  } = user || {};
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createAppointment({
+      doctorId,
+      doctorEmail,
+      doctorName,
+      patientId,
+      patientEmail,
+      patientPhone: phone,
+      reason,
+      appointmentDate: date,
+      patientName: firstName + " " + lastName,
+    });
+  };
+
   return (
     <section className="bg-gray-100 overflow-hidden">
       <div className="mx-auto w-[80%] my-20">
@@ -16,89 +87,101 @@ const AppointmentBook = () => {
                 <h6 className="text-xl font-semibold capitalize mb-2">
                   patient info
                 </h6>
-                <div class="flex items-center justify-center">
-                  <div class="mx-auto w-full  bg-white p-8 rounded-md">
-                    <form>
-                      <div class="mb-5">
+                <div className="flex items-center justify-center">
+                  <div className="mx-auto w-full  bg-white p-8 rounded-md">
+                    <form onSubmit={handleSubmit}>
+                      <div className="mb-5">
                         <label
-                          for="name"
-                          class="mb-3 block text-base font-medium text-[#07074D]"
+                          htmlFor="name"
+                          className="mb-3 block text-base font-medium text-[#07074D]"
                         >
                           Full Name
                         </label>
                         <input
+                          value={firstName + " " + lastName}
                           type="text"
                           name="name"
                           id="name"
                           placeholder="Full Name"
-                          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          readOnly
+                          required
                         />
                       </div>
-                      <div class="mb-5">
+                      <div className="mb-5">
                         <label
-                          for="phone"
-                          class="mb-3 block text-base font-medium text-[#07074D]"
+                          htmlFor="phone"
+                          className="mb-3 block text-base font-medium text-[#07074D]"
                         >
                           Phone Number
                         </label>
                         <input
+                          onChange={(e) => setPhone(e.target.value)}
                           type="text"
                           name="phone"
                           id="phone"
                           placeholder="Enter your phone number"
-                          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          required
                         />
                       </div>
 
-                      <div class="mb-5">
+                      <div className="mb-5">
                         <label
-                          for="email"
-                          class="mb-3 block text-base font-medium text-[#07074D]"
+                          htmlFor="email"
+                          className="mb-3 block text-base font-medium text-[#07074D]"
                         >
                           Email Address
                         </label>
                         <input
+                          value={patientEmail}
                           type="email"
                           name="email"
                           id="email"
                           placeholder="Enter your email"
-                          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          readOnly
+                          required
                         />
                       </div>
 
-                      <div class="mb-5">
+                      <div className="mb-5">
                         <label
-                          for="reason"
-                          class="mb-3 block text-base font-medium text-[#07074D]"
+                          htmlFor="reason"
+                          className="mb-3 block text-base font-medium text-[#07074D]"
                         >
                           Reason for appointment
                         </label>
                         <textarea
+                          onChange={(e) => setReason(e.target.value)}
                           name="emreasonail"
                           id="reason"
                           placeholder="Reason for appoint"
-                          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          required
                         ></textarea>
                       </div>
 
-                      <div class="-mx-3 flex flex-wrap">
-                        <div class="w-full px-3 sm:w-1/2">
-                          <div class="mb-5">
+                      <div className="-mx-3 flex flex-wrap">
+                        <div className="w-full px-3 sm:w-1/2">
+                          <div className="mb-5">
                             <label
-                              for="date"
-                              class="mb-3 block text-base font-medium text-[#07074D]"
+                              htmlFor="date"
+                              className="mb-3 block text-base font-medium text-[#07074D]"
                             >
                               Date
                             </label>
                             <input
+                              onChange={(e) => setDate(e.target.value)}
                               type="date"
                               name="date"
                               id="date"
-                              class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                              className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                              required
                             />
                           </div>
                         </div>
-                        <div class="w-full px-3 sm:w-1/2">
+                        {/* <div className="w-full px-3 sm:w-1/2">
                           <div class="mb-5">
                             <label
                               for="time"
@@ -113,63 +196,17 @@ const AppointmentBook = () => {
                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             />
                           </div>
-                        </div>
+                        </div> */}
                       </div>
 
-                      {/* <div class="mb-5 pt-3">
-                        <label class="mb-5 block text-base font-semibold text-[#07074D] sm:text-xl">
-                          Address Details
-                        </label>
-                        <div class="-mx-3 flex flex-wrap">
-                          <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
-                              <input
-                                type="text"
-                                name="area"
-                                id="area"
-                                placeholder="Enter area"
-                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                              />
-                            </div>
-                          </div>
-                          <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
-                              <input
-                                type="text"
-                                name="city"
-                                id="city"
-                                placeholder="Enter city"
-                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                              />
-                            </div>
-                          </div>
-                          <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
-                              <input
-                                type="text"
-                                name="state"
-                                id="state"
-                                placeholder="Enter state"
-                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                              />
-                            </div>
-                          </div>
-                          <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
-                              <input
-                                type="text"
-                                name="post-code"
-                                id="post-code"
-                                placeholder="Post Code"
-                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div> */}
-
                       <div>
-                        <button class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                        <button
+                          disabled={isLoadingAppointment}
+                          type="submit"
+                          class={`hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none ${
+                            user?._id ? "cursor-pointer" : "cursor-not-allowed"
+                          } `}
+                        >
                           Book Appointment
                         </button>
                       </div>
@@ -195,15 +232,15 @@ const AppointmentBook = () => {
                         <div className="w-[40px] h-[40px] rounded-full overflow-hidden">
                           <img
                             className="w-[40px] h-[40px] rounded-full object-cover border-2 border-blue-600"
-                            src={docImgOne}
-                            alt="name"
+                            src={image}
+                            alt={doctorName}
                           />
                         </div>
                       </div>
                     </div>
                     <div>
-                      <p className="text-xs font-bold">Doctors name</p>
-                      <p className="text-xs font-semibold">Dentist</p>
+                      <p className="text-xs font-bold">{doctorName}</p>
+                      <p className="text-xs font-semibold">{specialist}</p>
                     </div>
                   </div>
                   {/* card */}
