@@ -84,7 +84,7 @@ const DoctorSlider = () => {
 
           <div className="text-center my-6">
             <Link
-              to="/doctors"
+              to="/all-doctors/serarch"
               className="py-2 px-8 bg-[#1b5f92] rounded text-white"
             >
               See All Specialities

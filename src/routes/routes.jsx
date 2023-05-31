@@ -9,6 +9,7 @@ import AllPatient from "../pages/dashboard/admin/AllPatient";
 import DoctorProfile from "../pages/main/DoctorProfile";
 import AppointmentBook from "../pages/main/AppointmentBook";
 import Login from "../pages/main/Login";
+import SearchedDoctor from "../pages/main/SearchedDoctor";
 
 const routes = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const routes = createBrowserRouter([
       {
         path: "/doctors-booking/:doctorId",
         element: <AppointmentBook />,
+      },
+      {
+        path: "/all-doctors/serarch",
+        element: <SearchedDoctor />,
       },
     ],
   },

@@ -17,12 +17,12 @@ const Sidebar = () => {
     },
     {
       name: "Doctors",
-      link: "dashboard/admin/all-doctors",
+      link: "/dashboard/admin/all-doctors",
       icon: FiMessageSquare,
     },
     {
       name: "Patient",
-      link: "dashboard/admin/all-patients",
+      link: "/dashboard/admin/all-patients",
       icon: TbReportAnalytics,
       margin: true,
     },
