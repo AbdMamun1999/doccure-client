@@ -14,7 +14,14 @@ export const authApi = apiSlice.injectEndpoints({
         } catch (error) {}
       },
     }),
+
+    getAppointment: builder.query({
+      query: (email) => ({
+        url: `/doctor/appointments/${email}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateAppointmentMutation } = authApi;
+export const { useCreateAppointmentMutation, useGetAppointmentQuery } = authApi;

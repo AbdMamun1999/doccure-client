@@ -5,11 +5,17 @@ import Articles from "../../components/articles/Articles";
 import Testimonials from "../../components/testimonials/Testimonials";
 import DoctorSlider from "../../components/doctor/DoctorSlider";
 import ClinicSpecialities from "../../components/clinic/ClinicSpecialities";
+import BannerTwo from "../../components/banner/BannerTwo";
+import BannerThree from "../../components/banner/BannerThree";
+import Services from "../../components/services/Services";
 
 const Home = () => {
   return (
     <>
-      <Banner />
+      <BannerThree />
+      {/* <Banner /> */}
+      {/* <BannerTwo /> */}
+      <Services />
       <DoctorSlider />
       <ClinicSpecialities />
       <FaqSection />

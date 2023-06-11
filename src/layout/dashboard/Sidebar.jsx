@@ -22,7 +22,7 @@ const Sidebar = () => {
     },
     {
       name: "Patient",
-      link: "/dashboard/admin/all-patients",
+      link: "/dashboard/admin/all-appointment",
       icon: TbReportAnalytics,
       margin: true,
     },

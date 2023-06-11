@@ -1,13 +1,83 @@
 import React from "react";
 import { GoLocation } from "react-icons/go";
 import { FaStar, FaUserTie } from "react-icons/fa";
+import { MdInfoOutline } from "react-icons/md";
+import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+
+import ToolTipUi from "../ui/ToolTipUi";
+import RatingUi from "../ui/Ratings";
 
 const DoctorSliderCard = ({ doctor }) => {
-  const { _id, name, image, title, chamber, visitingFees, totalPatient } =
-    doctor || {};
+  const {
+    _id,
+    name,
+    image,
+    title,
+    chamber,
+    visitingFees,
+    totalPatient,
+    visitingHour,
+  } = doctor || {};
+
+  console.log(doctor);
   return (
-    <div className="rounded-md overflow-hidden p-2 bg-[#e0f2fe]">
+    <Card className="w-full max-w-[26rem]  shadow-lg">
+      <CardHeader floated={false} color="blue-gray" className="shadow-none ">
+        <img className="shadow-none" src={image} alt="ui/ux review check" />
+        <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
+      </CardHeader>
+      <CardBody className="py-2 px-3.5">
+        <div className="flex items-center justify-between">
+          <Typography
+            variant="h5"
+            color="blue-gray"
+            className="font-medium capitalize"
+          >
+            {name}
+          </Typography>
+        </div>
+        <Typography color="gray">{title.slice(0, 26)}</Typography>
+        <div className="flex flex-col gap-1">
+          <RatingUi />
+          <ToolTipUi title="Chamber" para={chamber} Icon={GoLocation} />
+          <ToolTipUi title="Visiting Hour" para={visitingHour} Icon={BsClock} />
+          <Typography variant="small" className=" flex gap-1 items-center">
+            <MdInfoOutline />${visitingFees}
+          </Typography>
+        </div>
+      </CardBody>
+      <CardFooter className="py-0 px-3.5 pb-3">
+        <div className="flex justify-between gap-x-3">
+          <Link
+            to={`/doctors-profile/${_id}`}
+            className="rounded-full px-4 py-2 text-[14px] text-[#204892] bg-[#e8f6ff] hover:bg-[#1b5d92] hover:text-white ease-in-out duration-300"
+          >
+            View Profile
+          </Link>
+          <Link
+            to={`/doctors-booking/${_id}`}
+            className="rounded-full px-4 py-2 text-[14px] text-white bg-[#10defd]  hover:bg-[#1b5d92] hover:text-white ease-in-out duration-300"
+          >
+            Book now
+          </Link>
+        </div>
+      </CardFooter>
+    </Card>
+  );
+};
+
+export default DoctorSliderCard;
+
+/*   <div className="rounded-md overflow-hidden p-2 bg-[#e0f2fe]">
       <div className="relative">
         <img className="object-cover rounded-t-md" src={image} />
         <div className="absolute top-3 right-5 bg-[#1b5d92] px-2 py-1 rounded-md">
@@ -75,8 +145,4 @@ const DoctorSliderCard = ({ doctor }) => {
           </Link>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default DoctorSliderCard;
+    </div> */

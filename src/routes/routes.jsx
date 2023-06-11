@@ -5,11 +5,11 @@ import Dashboard from "../layout/dashboard/Dashboard";
 import Profile from "../pages/dashboard/Profile";
 import AddDoctor from "../pages/dashboard/admin/AddDoctor";
 import AllDoctors from "../pages/dashboard/admin/AllDoctors";
-import AllPatient from "../pages/dashboard/admin/AllPatient";
 import DoctorProfile from "../pages/main/DoctorProfile";
 import AppointmentBook from "../pages/main/AppointmentBook";
 import Login from "../pages/main/Login";
 import SearchedDoctor from "../pages/main/SearchedDoctor";
+import AllAppointment from "../pages/dashboard/admin/AllAppointment";
 
 const routes = createBrowserRouter([
   {
@@ -52,8 +52,8 @@ const routes = createBrowserRouter([
         element: <AllDoctors />,
       },
       {
-        path: "admin/all-patients",
-        element: <AllPatient />,
+        path: "admin/all-appointment",
+        element: <AllAppointment />,
       },
     ],
   },
