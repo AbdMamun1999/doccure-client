@@ -1,6 +1,7 @@
 import React from "react";
 import FaqBanner from "./FaqBanner";
 import FaQuestions from "./FaQuestions";
+import FaqAccordion from "./FaqAccordion";
 
 const FaqSection = () => {
   return (
@@ -10,7 +11,8 @@ const FaqSection = () => {
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 content-center gap-x-8 ">
         <FaqBanner />
-        <FaQuestions />?
+        <FaQuestions />
+        {/* <FaqAccordion /> */}
       </div>
     </div>
   );

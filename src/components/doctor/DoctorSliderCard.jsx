@@ -31,10 +31,11 @@ const DoctorSliderCard = ({ doctor }) => {
   console.log(doctor);
   return (
     <Card className="w-full max-w-[26rem]  shadow-lg">
-      <CardHeader floated={false} color="blue-gray" className="shadow-none ">
-        <img className="shadow-none" src={image} alt="ui/ux review check" />
+      <CardHeader floated={false} color="blue-gray" className="shadow-none  ">
+        <img className="shadow-none " src={image} alt="ui/ux review check" />
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
       </CardHeader>
+
       <CardBody className="py-2 px-3.5">
         <div className="flex items-center justify-between">
           <Typography

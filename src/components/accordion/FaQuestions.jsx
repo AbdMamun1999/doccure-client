@@ -31,14 +31,10 @@ const faqs = [
 ];
 
 const FaQuestions = () => {
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState(faqs[0].id);
 
-  const handleToggle = (index) => {
-    if (active === index) {
-      setActive(null);
-    } else {
-      setActive(index);
-    }
+  const handleToggle = (value) => {
+    setActive(active === value ? 0 : value);
   };
 
   return (

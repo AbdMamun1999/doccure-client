@@ -8,6 +8,7 @@ import ClinicSpecialities from "../../components/clinic/ClinicSpecialities";
 import BannerTwo from "../../components/banner/BannerTwo";
 import BannerThree from "../../components/banner/BannerThree";
 import Services from "../../components/services/Services";
+import CounterSection from "../../components/counter/CounterSection";
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <DoctorSlider />
       <ClinicSpecialities />
       <FaqSection />
+      <CounterSection />
       <Articles />
       <Testimonials />
     </>
